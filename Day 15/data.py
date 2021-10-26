@@ -28,9 +28,10 @@ resources = {
     "water": 300,
     "milk": 200,
     "coffee": 100,
+    "money": 0,
 }
 
-money = {
+MONEY = {
 "quarters": 0.25,
 "dimes": 0.10,
 "nickles": 0.05,
