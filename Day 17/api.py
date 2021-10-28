@@ -1,6 +1,6 @@
-import requests
+"""API hook into the OpenTriva Database"""
 import base64
-import json
+import requests
 
 response = requests.get("https://opentdb.com/api.php?amount=50&type=boolean&encode=base64").json()
 data=[]
@@ -9,7 +9,6 @@ temp=response["results"]
 for item in temp:
     temp_dict={}
     for key,value in item.items():
-        iteration=0
         if isinstance(value, list):
             for i in value:
                 decoded_64_value = base64.b64decode(i)
@@ -21,4 +20,3 @@ for item in temp:
             temp_dict[key]=decoded_value
     data.append(temp_dict)
 question_data=data
-# print(question_data)
