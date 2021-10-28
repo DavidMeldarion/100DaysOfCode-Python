@@ -19,6 +19,8 @@ class QuizBrain:
         current_question=self.questions_list[self.question_number]
         self.question_number += 1
         user_guess = input(f"Q.{self.question_number}: {current_question.text} (True/False): ")
+        if user_guess=="end":
+            return True
         self.check_answer(user_guess, current_question.answer)
 
     def check_answer(self, user_guess, answer):

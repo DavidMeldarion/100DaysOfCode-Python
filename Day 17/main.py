@@ -4,7 +4,7 @@ A Question and Answer Game
 # import random
 from question_model import Question
 from quiz_brain import QuizBrain
-from data import question_data
+from api import question_data
 
 question_bank=[]
 for item in question_data:
@@ -16,9 +16,11 @@ for item in question_data:
 new_brain=QuizBrain(question_bank)
 
 QUESTIONS_LEFT=True
-
-while QUESTIONS_LEFT:
-    new_brain.next_question()
+STOP=False
+while not STOP:
+    STOP=new_brain.next_question()
     QUESTIONS_LEFT=new_brain.still_has_questions()
+    if QUESTIONS_LEFT is False:
+        STOP=True
 print("You've completed the quiz!")
 print(f"Your final score is: {new_brain.score}/{new_brain.question_number}.")
