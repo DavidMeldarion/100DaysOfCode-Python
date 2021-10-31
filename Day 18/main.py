@@ -1,23 +1,25 @@
 """Turtle"""
-from turtle import Turtle, Screen, colormode
+from turtle import Turtle, Screen
 from random import randint
 
 tim = Turtle()
 
 tim.color("blue")
 tim.shape("turtle")
-colormode(255)
+
+screen = Screen()
+screen.colormode(255)
 
 def shape(dimensions_dict):
     tim.color(randint(0,255),randint(0,255),randint(0,255))
     tim.setheading(0)
-    x=dimensions_dict["sides"]
-    i=0
-    while i < x:
+    sides=dimensions_dict["sides"]
+    increment=0
+    while increment < sides:
         tim.forward(100)
         tim.right(dimensions_dict["angle"])
         tim.forward(100)
-        i+=1
+        increment+=1
 
 dimensions=[
     {"sides": 3,"angle": 120},
@@ -30,13 +32,10 @@ dimensions=[
     ]
 
 i=0
-x=len(dimensions)
-while i < x:
+length=len(dimensions)
+while i < length:
     shape(dimensions[i])
     i+=1
-# triangle()
-# square()
-# pentagon()
 
-screen = Screen()
+
 screen.exitonclick()
