@@ -1,6 +1,6 @@
 """Turtle Crossing Game"""
-from random import randint
 import time
+import random
 from turtle import Screen
 from scoreboard import Scoreboard
 from player import Player
@@ -16,29 +16,29 @@ screen.tracer(0)
 #Class bind to variables
 player=Player()
 scoreboard = Scoreboard()
+car_manager = CarManager()
 
 screen.onkeypress(player.move, "Up")
 screen.listen()
 
 SCORE = 1
-LOOP_NUMBER = 0
-CARS = []
 
 GAME_IS_ON = True
 
 while GAME_IS_ON is True:
     time.sleep(0.1)
-    LOOP_NUMBER += 1
-    for item in CARS:
-        item.move(SCORE)
-        if player.distance(item) < 20:
-            GAME_IS_ON = False
-    if LOOP_NUMBER % 6 == 0:
-        CARS.append(CarManager(randint(-250,250)))
     screen.update()
+    random_chance = random.randint(1,6)
+    if random_chance == 1:
+        car_manager.create_car()
+    car_manager.move_cars()
+    for car in car_manager.all_cars:
+        if car.distance(player) <= 20:
+            GAME_IS_ON = False
     scoreboard.update_score(SCORE)
-    if player.ycor() >= 280:
+    if player.is_at_finish_line() is True:
+        player.go_to_start()
+        car_manager.level_up()
         SCORE += 1
-        player.player_reset()
 scoreboard.game_over()
 screen.exitonclick()

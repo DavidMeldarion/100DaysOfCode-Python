@@ -13,11 +13,16 @@ class Player(Turtle):
         self.shape("turtle")
         self.penup()
         self.color("black")
-        self.setpos(STARTING_POSITION)
+        self.go_to_start()
 
     def move(self):
+        """Moves player up by the set MOVE DISTANCE"""
         new_y = self.ycor() + MOVE_DISTANCE
         self.goto(self.xcor(), new_y)
 
-    def player_reset(self):
+    def is_at_finish_line(self):
+        """Checks player position"""
+        return self.ycor() > FINISH_LINE_Y
+    def go_to_start(self):
+        """Resets player to starting position"""
         self.setpos(STARTING_POSITION)
