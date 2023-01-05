@@ -1,7 +1,7 @@
 """Password Manager"""
-from tkinter import Tk, PhotoImage, Canvas, Entry, Button, Label, END, W
-from tkinter.ttk import *
+from tkinter import *
 from tkinter import messagebox
+from tkinter.ttk import *
 import random
 import pyperclip
 
