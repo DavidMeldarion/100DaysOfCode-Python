@@ -3,31 +3,30 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter.ttk import *
 import random
+import string
 import pyperclip
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
-def generate_password():
-    """Generates Password"""
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-    'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D',
-    'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-    'U', 'V', 'W', 'X', 'Y', 'Z']
-    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+def generate_random_password(length=16):
+    """Generates A Random Password
+        Args:
+            length (int): The length of the generated password. Default is 16.
+
+        Returns:
+            str: The generated password."""
+    letters = string.ascii_letters
+    numbers = string.digits
     symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
-    nr_letters = random.randint(8, 10)
-    nr_symbols = random.randint(2, 4)
-    nr_numbers = random.randint(2, 4)
+    # Generate the desired number of letters, numbers, and symbols
+    password_chars = random.choices(letters, k=length // 2) + random.choices(numbers, k=length // 4) + random.choices(symbols, k=length // 4)
 
-    password_letters = [random.choice(letters) for char in range(nr_letters)]
-    password_symbols = [random.choice(symbols) for char in range(nr_symbols)]
-    password_numbers = [random.choice(numbers) for char in range(nr_numbers)]
+    # Shuffle the characters
+    random.shuffle(password_chars)
 
-    password_list = password_letters + password_numbers + password_symbols
+    # Join the characters into a single string
+    password = "".join(password_chars)
 
-    random.shuffle(password_list)
-
-    password = "".join(password_list)
     password_entry.insert(END, password)
     pyperclip.copy(password)
 
@@ -72,8 +71,9 @@ password_text = Label(text="Password:")
 password_text.grid(column=0, row=3)
 
 #Buttons
-generate_password = Button(text="Generate Password",width=18, command=generate_password)
-generate_password.grid(column=2, row=3, sticky=(W))
+generate_random_password = Button(text="Generate Password",width=18,
+command=generate_random_password)
+generate_random_password.grid(column=2, row=3, sticky=(W))
 
 add_password = Button(text="Add", width=60, command=add_to_file)
 add_password.grid(column=1, row=4, columnspan=2, sticky=(W))
