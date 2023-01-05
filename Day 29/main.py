@@ -1,5 +1,5 @@
 """Password Manager"""
-from tkinter import *
+from tkinter import Tk, PhotoImage, Canvas, Entry, Button, Label, END, W
 from tkinter.ttk import *
 from tkinter import messagebox
 import random
@@ -8,7 +8,10 @@ import pyperclip
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate_password():
     """Generates Password"""
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+    'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D',
+    'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+    'U', 'V', 'W', 'X', 'Y', 'Z']
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
@@ -39,9 +42,9 @@ def add_to_file():
         messagebox.showwarning(title="Oops", message="Please don't leave any fields blank!")
     else:
         is_ok = messagebox.askokcancel(title=website_save, message=f"These are the "
-            f"details entered: \nEmail: {email_save}\nPassword: {password_save}\nIs it ok to save?") 
+            f"details entered: \nEmail: {email_save}\nPassword: {password_save}\nIs it ok to save?")
     if is_ok:
-        with open("passwords.txt", "a") as file:
+        with open("passwords.txt", "a", encoding="utf-8") as file:
             file.write(f"{website_save} | {email_save} | {password_save}\n")
         web_entry.delete(0, END)
         password_entry.delete(0, END)
